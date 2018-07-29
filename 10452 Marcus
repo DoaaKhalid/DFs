@@ -1,0 +1,56 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include <stdio.h>
+#define fr(i,x,n) for(int i=x;i<n;i++)
+#define frr(i,x,n) for(int i=x;i>=n;i--)
+using namespace std;
+char a[10][10];
+int x[3]={-1,0,0},y[3]={0,1,-1},n,m;
+string path="IEHOVA#",dir[3]={"forth","right","left"};
+vector<string> ans;
+bool ongread(int i,int j){return i>=0 && i<n && j>=0 &&j<m ;}
+void dfs(int i,int j,int node)
+{
+   if(node>path.size())return;
+   fr(k,0,3)
+   {
+       int tox=i+x[k],toy=j+y[k];
+       if(ongread(tox,toy)&& a[tox][toy]==path[node])
+       {
+           ans.push_back(dir[k]);
+           dfs(tox,toy,node+1);
+       }
+   }
+}
+void Doaa()
+{
+ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+}
+int main(){
+Doaa();
+int t;
+cin>>t;
+while(t--)
+{
+   pair<int,int> p;
+   cin>>n>>m;
+   fr(i,0,n)
+   fr(j,0,m)
+   {
+     cin>>a[i][j];
+     if(a[i][j]=='@')
+     p={i,j};
+   }
+   ans.clear();
+   dfs(p.first,p.second,0);
+   //cout<<"case"<<t<<endl;
+   fr(i,0,ans.size())
+   {
+       if(i!=ans.size()-1)
+        cout<<ans[i]<<" ";
+        else
+            cout<<ans[i]<<endl;
+    }
+}
+return 0;
+}
